@@ -1,0 +1,32 @@
+site_name: Documentation
+
+nav:
+    - Home: index.md
+    - Install: readme.md
+    - Advanced:
+        - advanced/maxpool.md
+        - advanced/alpha_pyrat.md
+        - advanced/backsub.md
+    - Development:
+        - contributing.md
+        - adding_library.md
+    - Sources: reference/
+
+plugins:
+  - gen-files:
+      scripts:
+        - docs/gen_doc_stubs.py
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [../src]
+  - literate-nav
+
+theme:
+  name: "material"
+  logo: 'img/logo-rect-white.png'
+  favicon: 'img/favicon.ico'
+#  features:
+#    - navigation.expand
+
+extra_css: [custom.css]

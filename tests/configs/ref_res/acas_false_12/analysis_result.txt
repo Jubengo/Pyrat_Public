@@ -1,0 +1,8 @@
+Check config.ini for parameters of the analysis
+Commit sha = 48bde0488d5b8331eb6e0d8357d1d6a501952764
+Saved date : 2023-02-06-15:59:22
+--------------------------------------------------------------------------------
+Result = False
+Time = 2.611 s
+Safe space = 0.00 %
+Number of analysis = 9

@@ -1,0 +1,30 @@
+[domain]
+domains = [zonotopes]
+max_size = -1
+max_noise = -1
+by_layer = True
+
+[analysis]
+split = True
+timeout = 10
+add_suffix = True
+nb_process = 4
+verbose = True
+
+[scorer]
+scorer = WidthScorer
+
+[booster]
+booster_threshold = 0.3
+refined_split = (2,)
+metric = polarity
+
+[logging]
+log_dir = tests/configs/results
+log_name = acas_false_0
+
+acas = 1, 7, 3
+
+[debugger]
+debug = True
+

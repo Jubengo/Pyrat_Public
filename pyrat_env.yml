@@ -1,0 +1,28 @@
+name: pyrat
+channels:
+  - defaults
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - loguru=0.5.3
+  - tqdm=4.59.0
+  - onnxruntime
+  - pip=21.2.4
+  - onnx>=1.9
+  - psutil=5.9
+  - pytest=6.2.5
+  - pillow=8.4
+  - pytorch:torchvision=0.12
+  - pytorch:cpuonly
+  - pytorch:pytorch=1.11
+  - pandas
+  - gitpython=3.1.27
+  - matplotlib>=3.3.4
+  - pyvis>=0.1.9
+  - configargparse
+  - pip:
+    - opencv-python>=4.5.1.48
+    - scipy>=1.5.4
+    - tensorflow>=2.7
+

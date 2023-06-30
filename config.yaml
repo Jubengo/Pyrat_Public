@@ -1,0 +1,8 @@
+name: PyRAT
+ami: ami-0280f3286512b1b99
+scripts_dir: .
+manual_installation_step: False
+run_installation_script_as_root: False
+run_post_installation_script_as_root: False
+run_toolkit_as_root: False
+description: Abstract Interpretation based analysis tool

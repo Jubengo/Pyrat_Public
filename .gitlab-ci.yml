@@ -1,0 +1,104 @@
+image: python:$python_version
+
+stages:
+  - test
+  - deploy
+  - compile
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+
+testDoc:
+  stage: test
+  before_script:
+    - python -m pip install pydocstyle
+  script:
+    - if [ $(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1) -gt $nb_doc_error ]; then printf "$(pydocstyle --config "tests/configs/pydocstyle.ini" src) \nMore error were found with pydocstyle ($(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1)) than on master ($nb_doc_error), please format your docstring"; exit 1; fi
+  interruptible: true
+  tags:
+    - docker
+
+runTests:
+  stage: test
+  cache:
+    key: "$CI_PROJECT_ID"
+    paths:
+      - .cache/pip
+      - venv/
+  before_script:
+    - apt update
+    - apt upgrade -y
+    - apt install -y libopenblas-dev zip
+    - python -V  # Print out python version for debugging
+    - pip install --upgrade pip
+    - export PIP_DEFAULT_TIMEOUT=100
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+  script:
+    - python -m pytest -s tests
+    - rm -r tests/configs/temp_res
+    - python -m pip install -r docs/requirements.txt
+    - mkdocs build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - site
+  tags:
+    - docker
+  interruptible: true
+
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r site/* public
+  artifacts:
+    paths:
+      - public
+  tags:
+    - docker
+  interruptible: true
+
+update_error_nb:
+  stage: deploy
+  before_script:
+    - python -m pip install pydocstyle
+  script:
+    - 'curl --request PUT --header "PRIVATE-TOKEN: $PROJ_TOKEN" "https://git.frama-c.com/api/v4/projects/$CI_PROJECT_ID/variables/nb_doc_error" --form "value=$(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1)"'
+  only:
+    - master
+  tags:
+    - docker
+
+
+compilePYC:
+  stage: test
+  before_script:
+    - apt update
+    - apt install -y zip
+  script:
+    - ls
+    - echo $CI_COMMIT_SHA > commit.txt
+    - rm -rf data docs
+    - find . -name "*.pyc" -delete
+    - python -m compileall .
+    - find . -name "*.py" -delete
+    - value=$(sed 's/\.//g' <<< $(sed 's/\.[^\.]*$//g' <<< $python_version))
+    - find . -name "*.pyc" -execdir bash -c 'mv -i -- $1 "../${1//.cpython-'$value'/}"' Mover {} \;
+    - zip -r compiled.zip . -x ".cache/*" -x ".git/*"
+  artifacts:
+    expire_in: 2 weeks
+    paths:
+      - compiled.zip
+  tags:
+    - docker
+  when: manual
