@@ -22,7 +22,6 @@ __pycache__/
 /pyrat_uc/
 
 toy.py
-*.sh
 exp_res/
 tests/configs/temp_res
 
@@ -158,7 +157,6 @@ dmypy.json
 # VSCode
 .vscode/
 *.pyc
-*.sh
 exp_res/
 *.html
 *.ini
