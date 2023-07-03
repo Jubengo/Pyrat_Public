@@ -23,6 +23,6 @@ echo "               AFFICHAGE ENVIRONNEMENT (avec conda):       "
 conda env export --no-builds
 echo "               AFFICHAGE ENVIRONNEMENT (avec mamba):       "
 mamba env export --no-builds
-python3 pyrat.pyc --read "from_pickle" --model_path $ONNX_FILE --property_path $VNNLIB_FILE --timeout $TIMEOUT \
+python /home/ubuntu/toolkit/pyrat.pyc --read "from_pickle" --model_path $ONNX_FILE --property_path $VNNLIB_FILE --timeout $TIMEOUT \
 --config $CATEGORY.ini --log_dir vnncomp --log_name temp
-python3 add_result.py vnncomp/temp $RESULTS_FILE
+python add_result.py vnncomp/temp $RESULTS_FILE
