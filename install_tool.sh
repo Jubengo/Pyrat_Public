@@ -5,12 +5,15 @@ source "${HOME}/conda/etc/profile.d/conda.sh"
 source "${HOME}/conda/etc/profile.d/mamba.sh"
 conda activate
 source ~/.bashrc
-mamba env create -f pyrat_env.yml -n temp_pyrat
+conda info
+mamba info
+mamba env create -f pyrat_env.yml -n temp_pyrat -vv
 mamba activate temp_pyrat
-conda env export --no-builds
-mamba env export --no-builds
+conda info
+mamba info
 python --version
 python3 --version
+ls
 python pyrat.pyc -h
 python3 pyrat.pyc -h
 export PYTHONPATH=$PYTHONPATH:$PWD
