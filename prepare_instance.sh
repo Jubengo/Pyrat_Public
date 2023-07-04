@@ -17,5 +17,5 @@ source ~/.bashrc
 mamba activate temp_pyrat
 #python /home/ubuntu/toolkit/pyrat.pyc --read "parsing_only" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
 #--config vnn_config/$CATEGORY.ini --log_dir vnncomp --log_name temp
-python PyRAT/pyrat.pyc --read "parsing_only" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
---config PyRAT/vnn_config/$CATEGORY.ini --log_dir PyRAT/vnncomp --log_name temp
+python $PyRAT/pyrat.pyc --read "parsing_only" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
+--config $PyRAT/vnn_config/$CATEGORY.ini --log_dir $PyRAT/vnncomp --log_name temp
