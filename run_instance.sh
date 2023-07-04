@@ -16,9 +16,14 @@ TIMEOUT=$6
 echo "Running $TOOL_NAME for benchmark instance in category '$CATEGORY' with onnx file '$ONNX_FILE' and vnnlib file
  '$VNNLIB_FILE' and timeout '$TIMEOUT'. Writing to '$RESULTS_FILE'"
 
-echo $CATEGORY
+PyRAT=/home/ubuntu/toolkit
+
+source "${HOME}/conda/etc/profile.d/conda.sh"
+source "${HOME}/conda/etc/profile.d/mamba.sh"
 conda activate
+source ~/.bashrc
 mamba activate temp_pyrat
-python /home/ubuntu/toolkit/pyrat.pyc --read "from_pickle" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
---timeout $TIMEOUT --config $CATEGORY.ini --log_dir vnncomp --log_name temp
-python /home/ubuntu/toolkit/add_result.py vnncomp/temp $RESULTS_FILE
+echo $CATEGORY
+python PyRAT/pyrat.pyc --read "from_pickle" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
+--timeout $TIMEOUT --config PyRAT/vnn_config/$CATEGORY.ini --log_dir PyRAT/vnncomp --log_name temp
+python PyRAT/add_result.py PyRAT/vnncomp/temp $RESULTS_FILE
