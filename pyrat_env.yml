@@ -21,9 +21,8 @@ dependencies:
   - matplotlib>=3.3.4
   - pyvis>=0.1.9
   - configargparse
-  - foolbox>=3.3.3
   - pip:
     - opencv-python>=4.5.1.48
     - scipy>=1.5.4
     - tensorflow>=2.7
-
+    - foolbox~=3.3.3
