@@ -22,6 +22,6 @@ if __name__ == "__main__":
         shutil.rmtree(result_path, ignore_errors=True)
     except Exception as e:
         print(e)
-        with Path(result_path).open("w") as savef:
+        with Path(result_file).open("w") as savef:
             savef.write("unknown\n")
         shutil.rmtree(result_path, ignore_errors=True)
