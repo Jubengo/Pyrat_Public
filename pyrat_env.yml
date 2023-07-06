@@ -14,8 +14,8 @@ dependencies:
   - pytest=6.2.5
   - pillow=8.4
   - pytorch:torchvision=0.12
-  - pytorch:cpuonly
-  - pytorch:pytorch=1.11
+  - pytorch:cudatoolkit=11.3
+  - pytorch:pytorch=1.11=*cuda*
   - pandas
   - gitpython=3.1.27
   - matplotlib>=3.3.4
@@ -29,3 +29,4 @@ dependencies:
     - tensorflow>=2.7
     - foolbox~=3.3.3
     - onnx2torch~=1.4.1
+
