@@ -5,28 +5,28 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - loguru=0.5.3
-  - tqdm=4.59.0
+  - loguru
+  - tqdm
   - onnxruntime
   - pip=21.2.4
   - onnx>=1.9
-  - psutil=5.9
-  - pytest=6.2.5
-  - pillow=8.4
+  - psutil
+  - pytest
+  - pillow
   - pytorch:torchvision=0.12
   - pytorch:cudatoolkit=11.3
   - pytorch:pytorch=1.11=*cuda*
-  - pandas
-  - gitpython=3.1.27
-  - matplotlib>=3.3.4
-  - pyvis>=0.1.9
-  - configargparse==1.5.3
-  - pydocstyle~=6.2.3
+  - gitpython
+  - matplotlib
+  - pyvis
+  - configargparse
+  - pydocstyle
   - protobuf==3.20.*
   - pip:
-    - opencv-python>=4.5.1.48
-    - scipy>=1.5.4
-    - tensorflow>=2.7
-    - foolbox~=3.3.3
-    - onnx2torch~=1.4.1
+      - opencv-python
+      - scipy
+      - tensorflow>=2.7
+      - foolbox~=3.3.3
+      - onnx2torch~=1.4.1
+      - cvxpy[CBC]>=1.2.0
 

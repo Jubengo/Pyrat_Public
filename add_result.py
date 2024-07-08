@@ -1,3 +1,4 @@
+import os.path
 import shutil
 import sys
 from pathlib import Path
@@ -13,8 +14,11 @@ if __name__ == "__main__":
             if res.result is True:
                 savef.write("unsat\n")
             elif res.result is False:
-                witness = get_res(Path(result_path) / "counter_example.pickle")
-                savef.write("sat\n" + witness)
+                if os.path.isfile(Path(result_path) / "counter_example.pickle"):
+                    witness = get_res(Path(result_path) / "counter_example.pickle")
+                    savef.write("sat\n" + witness)
+                else:
+                    print("No COUNTER EXAMPLE FILE PROVIDED:", Path(result_path))
             elif str(res.result).lower() == "timeout":
                 savef.write("timeout\n")
             else:
