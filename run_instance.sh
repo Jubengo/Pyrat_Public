@@ -27,4 +27,4 @@ echo $CATEGORY
 
 python $PyRAT/pyrat.pyc --read "from_pickle" --model_path $ONNX_FILE --property_path $VNNLIB_FILE \
 --timeout $TIMEOUT --config $PyRAT/vnn_config/$CATEGORY.ini --log_dir $PyRAT/$ONNX_FILE-$VNNLIB_FILE --log_name temp
-python $PyRAT/add_result.py $PyRAT/$ONNX_FILE-$VNNLIB_FILE/temp $RESULTS_FILE
+python $PyRAT/add_result.pyc $PyRAT/$ONNX_FILE-$VNNLIB_FILE/temp $RESULTS_FILE
