@@ -5,6 +5,7 @@ source "${HOME}/conda/etc/profile.d/conda.sh"
 source "${HOME}/conda/etc/profile.d/mamba.sh"
 conda activate
 source ~/.bashrc
+conda config --remove channels intel
 mamba env create -f pyrat_env.yml -n temp_pyrat
 mamba activate temp_pyrat
 python --version
