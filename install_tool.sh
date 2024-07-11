@@ -1,4 +1,5 @@
 #!/bin/bash
+lspci | grep -i nvidia
 wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
 bash Mambaforge.sh -b -p "${HOME}/conda"
 source "${HOME}/conda/etc/profile.d/conda.sh"
@@ -10,10 +11,4 @@ mamba activate temp_pyrat
 python --version
 python pyrat.pyc -h
 export PYTHONPATH=$PYTHONPATH:$PWD
-python -c "import torch; print(torch.cuda.is_available())"
-conda remove pytorch
-conda install cudatoolkit pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
-python -c "import torch; print(torch.cuda.is_available())"
-pip install torch==2.3.1+cu118 torchvision==0.18.1+cu118 torchaudio===2.3.1+cu118 --index-url https://download.pyt
-orch.org/whl/cu118
 python -c "import torch; print(torch.cuda.is_available())"
