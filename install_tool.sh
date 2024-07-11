@@ -11,3 +11,5 @@ python --version
 python pyrat.pyc -h
 export PYTHONPATH=$PYTHONPATH:$PWD
 python -c "import torch; print(torch.cuda.is_available())"
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+python -c "import torch; print(torch.cuda.is_available())"
