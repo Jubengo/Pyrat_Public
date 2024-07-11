@@ -1,5 +1,4 @@
 #!/bin/bash
-lspci | grep -i nvidia
 wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
 bash Mambaforge.sh -b -p "${HOME}/conda"
 source "${HOME}/conda/etc/profile.d/conda.sh"
@@ -11,4 +10,3 @@ mamba activate temp_pyrat
 python --version
 python pyrat.pyc -h
 export PYTHONPATH=$PYTHONPATH:$PWD
-python -c "import torch; print(torch.cuda.is_available())"
