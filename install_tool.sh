@@ -10,3 +10,4 @@ mamba activate temp_pyrat
 python --version
 python pyrat.pyc -h
 export PYTHONPATH=$PYTHONPATH:$PWD
+python -c "import torch; print(torch.cuda.is_available())"
