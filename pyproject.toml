@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyRAT"
+version = "2.0"
+authors = [
+    { name = "Augustin Lemesle", email = "augustin.lemesle@cea.fr" },
+    { name = "Julien Lehmann", email = "julien.lehmann@cea.fr" },
+#    { name = "Serge Durand", email = "serge.durand@cea.fr" },
+    { name = "Tristan Le Gall", email = "tristan.le-gall@cea.fr" },
+]
+description = "Python Reachability Assessment Tool"
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["dependencies", "optional-dependencies"]
+license = {text = "Proprietary CEA"}
+
+[project.urls]
+Homepage = "https://pyrat-analyzer.com"
+
+[tool.setuptools.packages]
+find = {}
+
+[project.scripts]
+pyrat = "pyrat.main:main"
+
+[tool.setuptools.package-data]
+pyrat = ["*.pyc", "c_compilation/*"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = { docs = { file = ["docs/requirements.txt"] } }

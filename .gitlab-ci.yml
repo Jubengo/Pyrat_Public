@@ -14,12 +14,21 @@ variables:
 # If you want to also cache the installed packages, you have to install
 # them in a virtualenv and cache it as well.
 
+testReq:
+  stage: test
+  script:
+    - cd tests
+    - python check_requirements.py
+  interruptible: true
+  tags:
+    - docker
+
 testDoc:
   stage: test
   before_script:
     - python -m pip install pydocstyle
   script:
-    - if [ $(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1) -gt $nb_doc_error ]; then printf "$(pydocstyle --config "tests/configs/pydocstyle.ini" src) \nMore error were found with pydocstyle ($(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1)) than on master ($nb_doc_error), please format your docstring"; exit 1; fi
+    - if [ $(pydocstyle --config "tests/configs/pydocstyle.ini" pyrat --count | tail -1) -gt $nb_doc_error ]; then printf "$(pydocstyle --config "tests/configs/pydocstyle.ini" pyrat) \nMore error were found with pydocstyle ($(pydocstyle --config "tests/configs/pydocstyle.ini" pyrat --count | tail -1)) than on master ($nb_doc_error), please format your docstring"; exit 1; fi
   interruptible: true
   tags:
     - docker
@@ -47,11 +56,11 @@ runTests:
     - rm -r tests/configs/temp_res
     - python -m pip install -r docs/requirements.txt
     - python -m docs.clean_docstring
-    - cp src/analyzer/analysis_param.py Documented/analyzer/analysis_param.py
-    - rm -r src/
+    - cp pyrat/analyzer/analysis_param.py Documented/analyzer/analysis_param.py
+    - rm -r pyrat/
     - cp readme.md docs/readme.md
     - cp CHANGELOG.md docs/CHANGELOG.md
-    - mv Documented src/
+    - mv Documented pyrat/
     - mkdocs build
   artifacts:
     expire_in: 1 day
@@ -79,7 +88,7 @@ update_error_nb:
   before_script:
     - python -m pip install pydocstyle
   script:
-    - 'curl --request PUT --header "PRIVATE-TOKEN: $PROJ_TOKEN" "https://git.frama-c.com/api/v4/projects/$CI_PROJECT_ID/variables/nb_doc_error" --form "value=$(pydocstyle --config "tests/configs/pydocstyle.ini" src --count | tail -1)"'
+    - 'curl --request PUT --header "PRIVATE-TOKEN: $PROJ_TOKEN" "https://git.frama-c.com/api/v4/projects/$CI_PROJECT_ID/variables/nb_doc_error" --form "value=$(pydocstyle --config "tests/configs/pydocstyle.ini" pyrat --count | tail -1)"'
   only:
     - master
   tags:

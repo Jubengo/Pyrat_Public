@@ -1,27 +1,28 @@
 name: pyrat
 channels:
-  - defaults
   - pytorch
+  - nvidia
   - conda-forge
 dependencies:
-  - python=3.9.13
+  - python=3.10
   - loguru
   - tqdm
   - onnxruntime
   - pip=21.2.4
-  - onnx>=1.9
+  - onnx
   - psutil
   - pytest
   - pillow
-  - pytorch:torchvision=0.12
-  - pytorch:cudatoolkit=11.3
-  - pytorch:pytorch=1.11=*cuda*
+  - pytorch:torchvision
+  - pytorch:pytorch>=2.2
+  - pytorch:pytorch-cuda=11.8
   - gitpython
   - matplotlib
   - pyvis
   - configargparse
   - pydocstyle
   - protobuf==3.20.*
+  - numpy>=1.22.3
   - pip:
       - opencv-python
       - scipy
@@ -31,4 +32,7 @@ dependencies:
       - cvxpy[CBC]>=1.2.0
       - cvxpy[CLARABEL]>=1.2.0
       - onnxsim
+      - networkx
+      - pyparsing
+      - trace-events
 
